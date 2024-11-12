@@ -1,4 +1,4 @@
-import java.util.*;
+package com.game_of_life;
 
 /*
  * @Description:
@@ -19,20 +19,18 @@ import java.util.*;
  * 输出：[[1,1],[1,1]]
  */
 class Solution {
-    public void gameOfLife(int[][] board) {
-        int[] neighbors = {0, 1, -1};
+    public int[][] gameOfLife(int[][] board) {
+        int[] neighbors = { 0, 1, -1 };
 
-        int rows = board.length();
-        int cols = board(0).length;
+        int rows = board.length;
+        int cols = board[0].length;
 
         // 创建复制数组 copyBoard
-        int[][]() copyBoard = new int[rows][cols];
+        int[][] copyBoard = new int[rows][cols];
 
         // 从原数组复制一份到 copyBoard 中
         for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                copyBoard[row][col] = board[row][col];
-            }
+            System.arraycopy(board[row], 0, copyBoard[row], 0, cols); // IDE说这样性能更好
         }
 
         // 遍历面板每一个格子里的细胞
@@ -50,7 +48,7 @@ class Solution {
                             int c = (col + neighbors[j]);
 
                             // 查看相邻的细胞是否是活细胞
-                            if {(r < rows && r >= 0) && (c < cols && c >= 0) && (copyBoard[r][c] == 1)} {
+                            if ((r < rows && r >= 0) && (c < cols && c >= 0) && (copyBoard[r][c] == 1)) {
                                 liveNeighbors += 1;
                             }
                         }
@@ -58,7 +56,7 @@ class Solution {
                 }
 
                 // 规则 1 或规则 3
-                if ((copyBoard[row][col] === 1) && (liveNeighbors < 2 || liveNeighbors > 3)) {
+                if ((copyBoard[row][col] == 1) && (liveNeighbors < 2 || liveNeighbors > 3)) {
                     board[row][col] = 0;
                 }
                 // 规则 4
@@ -67,5 +65,6 @@ class Solution {
                 }
             }
         }
+        return board;
     }
 }
